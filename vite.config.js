@@ -5,3 +5,5 @@ export default defineConfig({
   base: "/forecast",
   plugins: [react()],
 })
+
+
