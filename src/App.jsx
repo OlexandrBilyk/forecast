@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "./redux/auth/authSlice";
 import { useEffect } from "react";
@@ -6,16 +6,20 @@ import RegModal from "./components/Modals/RegModal/RegModal";
 import Home from "./pages/Home/Home";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import LoginModal from "./components/Modals/LoginModal/LoginModal";
+import NotFound from "./components/NotFound/NotFound";
 
 export default function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const savedUser = localStorage.getItem("currentUser");
     if (savedUser) {
       dispatch(login(JSON.parse(savedUser)));
-      navigate("/home");
+      if (location.pathname === "/" || location.pathname === "/login") {
+        navigate("/home");
+      }
     }
   }, [dispatch]);
 
@@ -31,6 +35,7 @@ export default function App() {
           </ProtectedRoute>
         }
       />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
