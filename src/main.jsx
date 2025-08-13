@@ -9,7 +9,7 @@ import "./sass/main.scss";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter basename="/forecast">
+      <BrowserRouter>
         <App />
       </BrowserRouter>
     </Provider>
