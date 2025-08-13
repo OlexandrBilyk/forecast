@@ -7,6 +7,7 @@ import Home from "./pages/Home/Home";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import LoginModal from "./components/Modals/LoginModal/LoginModal";
 import NotFound from "./components/NotFound/NotFound";
+import { setUser } from "./redux/user/userSlice";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ export default function App() {
     const savedUser = localStorage.getItem("currentUser");
     if (savedUser) {
       dispatch(login(JSON.parse(savedUser)));
+      dispatch(setUser(JSON.parse(savedUser)));
       if (location.pathname === "/" || location.pathname === "/login") {
         navigate("/home");
       }

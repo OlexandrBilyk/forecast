@@ -19,3 +19,24 @@ img {
 li {
     list-style-type: none;
 }
+
+.container {
+    @media (min-width: 768px) {
+        max-width: 768px;
+    }
+
+    @media (min-width: 1024px) {
+        max-width: 1200px;
+    }
+
+    // outline: 2px solid red;
+    width: 100%;
+    max-width: 767px;
+    min-width: 320px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+}
