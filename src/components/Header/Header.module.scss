@@ -71,10 +71,15 @@
 }
 
 .profile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 27px;
+    display: none;
+
+    @media (min-width:768px) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 27px;
+
+    }
 
     &Img {
         width: 50px;
