@@ -19,9 +19,8 @@ export default function App() {
     if (savedUser) {
       dispatch(login(JSON.parse(savedUser)));
       dispatch(setUser(JSON.parse(savedUser)));
-      if (location.pathname === "/" || location.pathname === "/login") {
-        navigate("/home");
-      }
+      
+      navigate("/home");
     }
   }, [dispatch]);
 
