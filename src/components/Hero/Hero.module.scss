@@ -1,0 +1,219 @@
+.hero {
+    padding: 50px 0 100px;
+    background-color: #000;
+    background-image: linear-gradient(to right,
+            rgba(47, 48, 58, 0.4),
+            rgba(47, 48, 58, 0.4)),
+        url("/images/hero-bg-mobile.jpg");
+    background-position: center;
+    background-size: cover;
+
+    @media (min-device-pixel-ratio: 2),
+    (min-resolution: 2dpi),
+    (min-resolution: 192dppx) {
+        background-image: linear-gradient(to right,
+                rgba(47, 48, 58, 0.4),
+                rgba(47, 48, 58, 0.4)),
+            url("/images/hero-bg-mobile@2x.jpg");
+    }
+
+    @media (min-width:768px) {
+        padding: 40px 0;
+        background-image: linear-gradient(to right,
+                rgba(47, 48, 58, 0.4),
+                rgba(47, 48, 58, 0.4)),
+            url("/images/hero-bg-tablet.jpg");
+
+        @media (min-device-pixel-ratio: 2),
+        (min-resolution: 2dpi),
+        (min-resolution: 192dppx) {
+            background-image: linear-gradient(to right,
+                    rgba(47, 48, 58, 0.4),
+                    rgba(47, 48, 58, 0.4)),
+                url("/images/hero-bg-tablet@2x.jpg");
+        }
+    }
+
+    @media (min-width:1024px) {
+        padding: 100px 0;
+        background-image: linear-gradient(to right,
+                rgba(47, 48, 58, 0.4),
+                rgba(47, 48, 58, 0.4)),
+            url("/images/hero-bg-desktop.jpg");
+
+        @media (min-device-pixel-ratio: 2),
+        (min-resolution: 2dpi),
+        (min-resolution: 192dppx) {
+            background-image: linear-gradient(to right,
+                    rgba(47, 48, 58, 0.4),
+                    rgba(47, 48, 58, 0.4)),
+                url("/images/hero-bg-desktop@2x.jpg");
+        }
+    }
+}
+
+.mainTitle {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 35px;
+
+    @media (min-width:768px) {
+        font-size: 20px;
+        margin-bottom: 40px;
+
+    }
+
+    @media (min-width:1024px) {
+        font-size: 40px;
+        margin-bottom: 80px;
+    }
+}
+
+.list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 295px;
+    margin: 0 auto 48px;
+    position: relative;
+
+    @media (min-width:768px) {
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 68px;
+        max-width: 100%;
+        margin-bottom: 106px;
+
+    }
+
+    @media (min-width:1024px) {
+        gap: 100px;
+        margin-bottom: 137px;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 80px;
+        width: 2px;
+        height: 80px;
+        transform: translateY(-50%);
+        background-color: #fff;
+
+        @media (min-width: 768px) {
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 110px;
+        }
+
+        @media (min-width: 1024px) {
+            height: 144px;
+        }
+    }
+}
+
+.item {
+    max-width: 136px;
+    width: 100%;
+    padding-left: 25px;
+
+    @media (min-width:768px) {
+        padding: 0;
+        max-width: 172px;
+
+    }
+
+    @media (min-width:1024px) {
+        max-width: 345px;
+    }
+}
+
+.text {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    color: #fff;
+    max-width: 136px;
+
+    @media (min-width:768px) {
+        font-size: 14px;
+        max-width: 172px;
+        text-align: right;
+    }
+
+    @media (min-width:1024px) {
+        font-size: 24px;
+        max-width: 345px;
+    }
+}
+
+.date {
+    max-width: 69px;
+
+    @media (min-width:768px) {
+        max-width: 96px;
+    }
+
+    @media (min-width:1024px) {
+        max-width: 164px;
+    }
+
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+
+    &Input {
+        border-radius: 5px 0 0 5px;
+        background-color: #d9d9d9;
+        padding: 4px 10px;
+
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        font-size: 6px;
+        color: #878787;
+        min-width: 158px;
+
+        @media (min-width:768px) {
+            padding: 8px 19px;
+            min-width: 373px;
+            font-size: 10px;
+        }
+        @media (min-width:768px) {
+            padding: 13px 29px;
+            min-width: 580px;
+            font-size: 14px;
+        }
+    }
+
+    &Btn {
+        border-radius: 0 5px 5px 0;
+        background-color: #ffb36c;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &Icon {
+        width: 9px;
+        height: 9px;
+        fill: #000;
+
+        @media (min-width:768px) {
+            width: 16px;
+            height: 16px;
+        }
+        @media (min-width:1024px) {
+            width: 25px;
+            height: 25px;
+        }
+    }
+}
