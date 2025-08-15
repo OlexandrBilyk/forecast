@@ -1,11 +1,38 @@
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import styles from "./Hero.module.scss";
+import { useLazyGetWeatherByCityQuery } from "../../redux/weather/weatherApi";
+import { addCity } from "../../redux/cities/CitiesSlice";
+import { useDispatch } from "react-redux";
 
 export default function Hero() {
+  const dispatch = useDispatch();
   const [date, setDate] = useState(null);
   const [searchValue, setSearchValue] = useState("");
+  const [getWeather] = useLazyGetWeatherByCityQuery();
 
+  const handleSearch = async () => {
+    if (searchValue.trim() !== "") {
+      const result = await getWeather(searchValue);
+
+      if (result.data) {
+        dispatch(
+          addCity({
+            name: result.data.name,
+            country: result.data.sys.country,
+            feelsLike: result.data.main.feels_like,
+            min: result.data.main.temp_min,
+            max: result.data.main.temp_max,
+            humidity: result.data.main.humidity,
+            pressure: result.data.main.pressure,
+            windSpeed: result.data.wind.speed,
+            visibility: result.data.visibility,
+            lastUpdated: new Date().toISOString(),
+          })
+        );
+      }
+    }
+  };
   useEffect(() => {
     const currentDate = new Date();
     setDate(format(currentDate, "MMMM yyyy EEEE, do"));
@@ -34,7 +61,11 @@ export default function Hero() {
             placeholder="Search location..."
             onChange={(e) => setSearchValue(e.target.value)}
           />
-          <button type="button" className={styles.searchBtn}>
+          <button
+            type="button"
+            className={styles.searchBtn}
+            onClick={handleSearch}
+          >
             <svg className={styles.searchIcon}>
               <use href="/icons/symbol-defs.svg#icon-search"></use>
             </svg>
