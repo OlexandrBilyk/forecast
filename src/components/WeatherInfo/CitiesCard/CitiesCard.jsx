@@ -2,72 +2,120 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from "./CitiesCard.module.scss";
 import { format } from "date-fns";
 import { getName } from "country-list";
+import { delCity, addCity } from "../../../redux/cities/CitiesSlice";
+import { useLazyGetWeatherByCityQuery } from "../../../redux/weather/weatherApi";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function CitiesCard() {
   const cities = useSelector((state) => state.cities.cities);
-  const date = new Date();
+  const dispatch = useDispatch();
+  const [getWeather] = useLazyGetWeatherByCityQuery();
 
   const citiesValues =
     Object.values(cities).length > 0 ? Object.values(cities) : [];
 
+  async function updateWeather(name) {
+    const result = await getWeather(name);
+
+    if (result.data) {
+      dispatch(
+        addCity({
+          name: result.data.name,
+          country: result.data.sys.country,
+          temp: result.data.main.temp,
+          feelsLike: result.data.main.feels_like,
+          min: result.data.main.temp_min,
+          max: result.data.main.temp_max,
+          humidity: result.data.main.humidity,
+          pressure: result.data.main.pressure,
+          windSpeed: result.data.wind.speed,
+          visibility: result.data.visibility,
+        })
+      );
+
+      toast.success("Successfully updated.");
+    } else {
+      toast.error("Update failed.");
+    }
+  }
   return (
-    <section>
-      <div className="container">
-        <ul className={styles.list}>
-          {citiesValues.map((el, i) => (
-            <li className={styles.item} key={el.name}>
-              <div className={styles.location}>
-                <h2 className={styles.loccationTitle}>{el.name}</h2>
-                <h2 className={styles.loccationTitle}>{getName(el.country)}</h2>
-              </div>
-              <p className={styles.currentTime}>
-                {date.getHours()}:{date.getMinutes()}
-              </p>
-              <div className={styles.filters}>
-                <button type="button" className={styles.filtersBtn}>
-                  Hourly forecast
-                </button>
-                <button type="button" className={styles.filtersBtn}>
-                  Weekly forecast
-                </button>
-              </div>
-              <div className={styles.datetime}>
-                <p className={styles.date}>
-                  13.10.2023 | {format(date, "EEEE")}
-                </p>
-              </div>
-              <div className={styles.thumb}>
-                <img src="/images/sun.jpg" alt="img" className={styles.image} />
-              </div>
-              <p className={styles.temp}>{el.temp}℃</p>
-              <div className={styles.utils}>
-                <div className={styles.utilsLeft}>
-                  <button type="button" className={styles.btn}>
-                    <svg className={styles.icon}>
-                      <use href="/icons/symbol-defs.svg#icon-refresh"></use>
-                    </svg>
-                  </button>
-                  <button type="button" className={styles.btn}>
-                    <svg className={styles.icon}>
-                      <use href="/icons/heart.svg"></use>
-                    </svg>
-                  </button>
-                </div>
-                <div className={styles.utilsRight}>
-                  <button type="button" className={styles.btnMore}>
-                    See more
-                  </button>
-                  <button type="button" className={styles.btn}>
-                    <svg className={styles.icon}>
-                      <use href="/icons/delete.svg"></use>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
+    <>
+      <ToastContainer position="top-right" autoClose={3000} />
+
+      <section>
+        <div className="container">
+          <ul className={styles.list}>
+            {citiesValues.map((el, i) => {
+              const date = new Date(el.date);
+
+              return (
+                <li className={styles.item} key={el.name}>
+                  <div className={styles.location}>
+                    <h2 className={styles.loccationTitle}>{el.name}</h2>
+                    <h2 className={styles.loccationTitle}>
+                      {getName(el.country)}
+                    </h2>
+                  </div>
+                  <p className={styles.currentTime}>{format(date, "HH:mm")}</p>
+                  <div className={styles.filters}>
+                    <button type="button" className={styles.filtersBtn}>
+                      Hourly forecast
+                    </button>
+                    <button type="button" className={styles.filtersBtn}>
+                      Weekly forecast
+                    </button>
+                  </div>
+                  <div className={styles.datetime}>
+                    <p className={styles.date}>
+                      {format(date, "dd.MM.yyyy")} | {format(date, "EEEE")}
+                    </p>
+                  </div>
+                  <div className={styles.thumb}>
+                    <img
+                      src="/images/sun.jpg"
+                      alt="img"
+                      className={styles.image}
+                    />
+                  </div>
+                  <p className={styles.temp}>{el.temp}℃</p>
+                  <div className={styles.utils}>
+                    <div className={styles.utilsLeft}>
+                      <button
+                        type="button"
+                        className={`${styles.btn} ${styles.btnRefresh}`}
+                        onClick={() => updateWeather(el.name)}
+                      >
+                        <svg className={styles.icon}>
+                          <use href="/icons/symbol-defs.svg#icon-refresh"></use>
+                        </svg>
+                      </button>
+                      <button type="button" className={styles.btn}>
+                        <svg className={styles.icon}>
+                          <use href="/icons/heart.svg"></use>
+                        </svg>
+                      </button>
+                    </div>
+                    <div className={styles.utilsRight}>
+                      <button type="button" className={styles.btnMore}>
+                        See more
+                      </button>
+                      <button
+                        type="button"
+                        className={styles.btn}
+                        onClick={() => dispatch(delCity(el.name))}
+                      >
+                        <svg className={styles.icon}>
+                          <use href="/icons/delete.svg"></use>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
+    </>
   );
 }

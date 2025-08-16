@@ -7,7 +7,7 @@ export const citiesSlice = createSlice({
     },
     reducers: {
         addCity: (state, action) => {
-            const { name, country, min, max, humidity, pressure, windSpeed, lastUpdated, feelsLike, visibility, temp } = action.payload
+            const { name, country, min, max, humidity, pressure, windSpeed, date, feelsLike, visibility, temp } = action.payload
 
             const key = name.toLowerCase()
 
@@ -22,14 +22,24 @@ export const citiesSlice = createSlice({
                 pressure,
                 windSpeed,
                 visibility,
-                lastUpdated
+                date: new Date().toISOString()
             };
 
             localStorage.setItem('cities', JSON.stringify(state.cities))
+        },
+        delCity: (state, action) => {
+            const key = action.payload.toLowerCase()
+
+            delete state.cities[key]
+            localStorage.setItem('cities', JSON.stringify(state.cities))
+
+        },
+        setCities: (state, action) => {
+            state.cities = action.payload
         }
     }
 })
 
-export const { addCity } = citiesSlice.actions
+export const { addCity, setCities, delCity } = citiesSlice.actions
 const citiesReducer = citiesSlice.reducer
 export default citiesReducer

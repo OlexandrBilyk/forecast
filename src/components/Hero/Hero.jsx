@@ -32,7 +32,6 @@ export default function Hero() {
             pressure: result.data.main.pressure,
             windSpeed: result.data.wind.speed,
             visibility: result.data.visibility,
-            lastUpdated: new Date().toISOString(),
           })
         );
         toast.success(`${result.data.name} was successfully added`);

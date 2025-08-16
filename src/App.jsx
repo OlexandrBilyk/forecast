@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "./redux/auth/authSlice";
 import { useEffect } from "react";
@@ -8,19 +8,25 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import LoginModal from "./components/Modals/LoginModal/LoginModal";
 import NotFound from "./components/NotFound/NotFound";
 import { setUser } from "./redux/user/userSlice";
+import { setCities } from "./redux/cities/CitiesSlice";
 
 export default function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     const savedUser = localStorage.getItem("currentUser");
     if (savedUser) {
       dispatch(login(JSON.parse(savedUser)));
       dispatch(setUser(JSON.parse(savedUser)));
-      
+
       navigate("/home");
+    }
+
+    const cities = JSON.parse(localStorage.getItem("cities") || "{}");
+
+    if (cities) {
+      dispatch(setCities(cities));
     }
   }, [dispatch]);
 
