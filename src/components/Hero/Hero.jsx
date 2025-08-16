@@ -19,11 +19,12 @@ export default function Hero() {
 
       const result = await getWeather(searchValue);
 
-      if (result.data ?? result.data.cod !== 404) {
+      if (result.data && result.data.cod !== 404) {
         dispatch(
           addCity({
             name: result.data.name,
             country: result.data.sys.country,
+            temp: result.data.main.temp,
             feelsLike: result.data.main.feels_like,
             min: result.data.main.temp_min,
             max: result.data.main.temp_max,

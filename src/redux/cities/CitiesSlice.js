@@ -7,13 +7,14 @@ export const citiesSlice = createSlice({
     },
     reducers: {
         addCity: (state, action) => {
-            const { name, country, min, max, humidity, pressure, windSpeed, lastUpdated, feelsLike, visibility } = action.payload
+            const { name, country, min, max, humidity, pressure, windSpeed, lastUpdated, feelsLike, visibility, temp } = action.payload
 
             const key = name.toLowerCase()
 
             state.cities[key] = {
                 name,
                 country,
+                temp,
                 feelsLike,
                 min,
                 max,
