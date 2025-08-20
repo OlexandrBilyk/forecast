@@ -32,8 +32,11 @@ export default function Hero() {
             pressure: result.data.main.pressure,
             windSpeed: result.data.wind.speed,
             visibility: result.data.visibility,
+            coord: result.data.coord,
           })
         );
+        console.log(result);
+        
         toast.success(`${result.data.name} was successfully added`);
       } else {
         throw new Error("erorr");

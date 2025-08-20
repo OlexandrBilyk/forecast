@@ -6,7 +6,7 @@ import { delCity, addCity } from "../../../redux/cities/CitiesSlice";
 import { useLazyGetWeatherByCityQuery } from "../../../redux/weather/weatherApi";
 import { ToastContainer, toast } from "react-toastify";
 
-export default function CitiesCard() {
+export default function CitiesCards({ setType }) {
   const cities = useSelector((state) => state.cities.cities);
   const dispatch = useDispatch();
   const [getWeather] = useLazyGetWeatherByCityQuery();
@@ -30,6 +30,7 @@ export default function CitiesCard() {
           pressure: result.data.main.pressure,
           windSpeed: result.data.wind.speed,
           visibility: result.data.visibility,
+          coord: result.data.coord,
         })
       );
 
@@ -58,10 +59,28 @@ export default function CitiesCard() {
                   </div>
                   <p className={styles.currentTime}>{format(date, "HH:mm")}</p>
                   <div className={styles.filters}>
-                    <button type="button" className={styles.filtersBtn}>
+                    <button
+                      type="button"
+                      className={styles.filtersBtn}
+                      onClick={() =>
+                        setType({
+                          type: "hourly",
+                          city: el.name,
+                        })
+                      }
+                    >
                       Hourly forecast
                     </button>
-                    <button type="button" className={styles.filtersBtn}>
+                    <button
+                      type="button"
+                      className={styles.filtersBtn}
+                      onClick={() =>
+                        setType({
+                          type: "weekly",
+                          city: el.name,
+                        })
+                      }
+                    >
                       Weekly forecast
                     </button>
                   </div>

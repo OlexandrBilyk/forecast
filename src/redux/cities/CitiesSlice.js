@@ -7,7 +7,7 @@ export const citiesSlice = createSlice({
     },
     reducers: {
         addCity: (state, action) => {
-            const { name, country, min, max, humidity, pressure, windSpeed, date, feelsLike, visibility, temp } = action.payload
+            const { name, country, min, coord, max, humidity, pressure, windSpeed, feelsLike, visibility, temp } = action.payload
 
             const key = name.toLowerCase()
 
@@ -22,7 +22,8 @@ export const citiesSlice = createSlice({
                 pressure,
                 windSpeed,
                 visibility,
-                date: new Date().toISOString()
+                coord,
+                date: new Date().toISOString(),
             };
 
             localStorage.setItem('cities', JSON.stringify(state.cities))
