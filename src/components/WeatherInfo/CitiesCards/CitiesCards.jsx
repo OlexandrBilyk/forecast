@@ -5,6 +5,7 @@ import { getName } from "country-list";
 import { delCity, addCity } from "../../../redux/cities/CitiesSlice";
 import { useLazyGetWeatherByCityQuery } from "../../../redux/weather/weatherApi";
 import { ToastContainer, toast } from "react-toastify";
+import WeatherIcon from "../../WeatherIcon/WeatherIcon";
 
 export default function CitiesCards({ setType }) {
   const cities = useSelector((state) => state.cities.cities);
@@ -90,11 +91,10 @@ export default function CitiesCards({ setType }) {
                     </p>
                   </div>
                   <div className={styles.thumb}>
-                    <img
-                      src="/images/sun.jpg"
-                      alt="img"
+                    <WeatherIcon
+                      icon={el.icon}
                       className={styles.image}
-                    />
+                    ></WeatherIcon>
                   </div>
                   <p className={styles.temp}>{el.temp}℃</p>
                   <div className={styles.utils}>
@@ -121,7 +121,10 @@ export default function CitiesCards({ setType }) {
                       <button
                         type="button"
                         className={styles.btn}
-                        onClick={() => dispatch(delCity(el.name))}
+                        onClick={() => {
+                          dispatch(delCity(el.name));
+                          setType({ type: null, city: "" });
+                        }}
                       >
                         <svg className={styles.icon}>
                           <use href="/icons/delete.svg"></use>

@@ -7,7 +7,7 @@ export const citiesSlice = createSlice({
     },
     reducers: {
         addCity: (state, action) => {
-            const { name, country, min, coord, max, humidity, pressure, windSpeed, feelsLike, visibility, temp } = action.payload
+            const { name, country, min, icon, coord, max, humidity, pressure, windSpeed, feelsLike, visibility, temp } = action.payload
 
             const key = name.toLowerCase()
 
@@ -23,6 +23,7 @@ export const citiesSlice = createSlice({
                 windSpeed,
                 visibility,
                 coord,
+                icon,
                 date: new Date().toISOString(),
             };
 

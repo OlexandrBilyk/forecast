@@ -33,10 +33,11 @@ export default function Hero() {
             windSpeed: result.data.wind.speed,
             visibility: result.data.visibility,
             coord: result.data.coord,
+            icon: result.data.weather[0].icon,
           })
         );
         console.log(result);
-        
+
         toast.success(`${result.data.name} was successfully added`);
       } else {
         throw new Error("erorr");

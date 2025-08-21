@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLazyGetHourlyByCityQuery } from "../../../redux/weather/weatherApi";
+import { useLazyGetHourlyByCityQuery } from "../../../../redux/weather/weatherApi";
 
 import { Line } from "react-chartjs-2";
 import {

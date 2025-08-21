@@ -15,10 +15,8 @@ export const weatherApi = createApi({
         getHourlyByCity: builder.query({
             query: (city) =>
                 `data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`,
-        }),
-
-
-    }),
+        }), 
+    })
 });
 
-export const { useLazyGetWeatherByCityQuery, useLazyGetHourlyByCityQuery, } = weatherApi;
+export const { useLazyGetWeatherByCityQuery, useLazyGetHourlyByCityQuery } = weatherApi;                       

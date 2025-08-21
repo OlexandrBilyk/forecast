@@ -1,14 +1,15 @@
-import HourslyInfo from "./HourslyInfo";
+import HourslyInfo from "./HourslyInfo/HourslyInfo";
+import WeeklyInfo from "./WeeklyInfo/WeeklyInfo";
 
 export default function CityInfo({ type }) {
   return (
-    <section>
+    <>
       {type &&
         (type.type === "hourly" ? (
           <HourslyInfo city={type.city} />
         ) : (
-          <p>weekly</p>
+          <WeeklyInfo city={type.city}></WeeklyInfo>
         ))}
-    </section>
+    </>
   );
 }
