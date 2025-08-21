@@ -2,10 +2,15 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from "./CitiesCard.module.scss";
 import { format } from "date-fns";
 import { getName } from "country-list";
-import { delCity, addCity } from "../../../redux/cities/CitiesSlice";
+import {
+  delCity,
+  addCity,
+  changeFavorite,
+} from "../../../redux/cities/CitiesSlice";
 import { useLazyGetWeatherByCityQuery } from "../../../redux/weather/weatherApi";
 import { ToastContainer, toast } from "react-toastify";
 import WeatherIcon from "../../WeatherIcon/WeatherIcon";
+import { FaRegHeart, FaHeart, FaRegTrashAlt } from "react-icons/fa";
 
 export default function CitiesCards({ setType }) {
   const cities = useSelector((state) => state.cities.cities);
@@ -14,6 +19,11 @@ export default function CitiesCards({ setType }) {
 
   const citiesValues =
     Object.values(cities).length > 0 ? Object.values(cities) : [];
+
+  const sortedCities = [...citiesValues].sort((a, b) => {
+    if (a.isFavorite === b.isFavorite) return 0;
+    return a.isFavorite ? -1 : 1;
+  });
 
   async function updateWeather(name) {
     const result = await getWeather(name);
@@ -31,6 +41,7 @@ export default function CitiesCards({ setType }) {
           pressure: result.data.main.pressure,
           windSpeed: result.data.wind.speed,
           visibility: result.data.visibility,
+          icon: result.data.weather[0].icon,
           coord: result.data.coord,
         })
       );
@@ -47,7 +58,7 @@ export default function CitiesCards({ setType }) {
       <section>
         <div className="container">
           <ul className={styles.list}>
-            {citiesValues.map((el, i) => {
+            {sortedCities.map((el, i) => {
               const date = new Date(el.date);
 
               return (
@@ -108,10 +119,21 @@ export default function CitiesCards({ setType }) {
                           <use href="/icons/symbol-defs.svg#icon-refresh"></use>
                         </svg>
                       </button>
-                      <button type="button" className={styles.btn}>
-                        <svg className={styles.icon}>
-                          <use href="/icons/heart.svg"></use>
-                        </svg>
+                      <button
+                        type="button"
+                        className={`${styles.btn} ${
+                          el.isFavorite ? styles.favorite : ""
+                        }`}
+                        onClick={() => {
+                          dispatch(changeFavorite({ name: el.name }));
+                        }}
+                      >
+                        <FaRegHeart
+                          className={`${styles.icon} ${styles.iconDefault}`}
+                        ></FaRegHeart>
+                        <FaHeart
+                          className={`${styles.icon} ${styles.iconFavorite}`}
+                        ></FaHeart>
                       </button>
                     </div>
                     <div className={styles.utilsRight}>
@@ -126,9 +148,7 @@ export default function CitiesCards({ setType }) {
                           setType({ type: null, city: "" });
                         }}
                       >
-                        <svg className={styles.icon}>
-                          <use href="/icons/delete.svg"></use>
-                        </svg>
+                        <FaRegTrashAlt className={styles.icon}></FaRegTrashAlt>
                       </button>
                     </div>
                   </div>

@@ -34,6 +34,7 @@ export default function Hero() {
             visibility: result.data.visibility,
             coord: result.data.coord,
             icon: result.data.weather[0].icon,
+            isFavorite: false
           })
         );
         console.log(result);

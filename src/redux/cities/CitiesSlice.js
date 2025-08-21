@@ -7,7 +7,7 @@ export const citiesSlice = createSlice({
     },
     reducers: {
         addCity: (state, action) => {
-            const { name, country, min, icon, coord, max, humidity, pressure, windSpeed, feelsLike, visibility, temp } = action.payload
+            const { name, country, min, isFavorite, icon, coord, max, humidity, pressure, windSpeed, feelsLike, visibility, temp } = action.payload
 
             const key = name.toLowerCase()
 
@@ -24,6 +24,7 @@ export const citiesSlice = createSlice({
                 visibility,
                 coord,
                 icon,
+                isFavorite: isFavorite || false,
                 date: new Date().toISOString(),
             };
 
@@ -38,10 +39,20 @@ export const citiesSlice = createSlice({
         },
         setCities: (state, action) => {
             state.cities = action.payload
+        },
+        changeFavorite: (state, action) => {
+            const { name } = action.payload
+            const key = name.toLowerCase()
+
+            if (state.cities[key]) {
+                state.cities[key].isFavorite = !state.cities[key].isFavorite
+            }
+
+            localStorage.setItem('cities', JSON.stringify(state.cities))
         }
     }
 })
 
-export const { addCity, setCities, delCity } = citiesSlice.actions
+export const { addCity, setCities, delCity, changeFavorite } = citiesSlice.actions
 const citiesReducer = citiesSlice.reducer
 export default citiesReducer
