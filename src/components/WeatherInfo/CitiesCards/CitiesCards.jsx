@@ -12,7 +12,7 @@ import { ToastContainer, toast } from "react-toastify";
 import WeatherIcon from "../../WeatherIcon/WeatherIcon";
 import { FaRegHeart, FaHeart, FaRegTrashAlt } from "react-icons/fa";
 
-export default function CitiesCards({ setType }) {
+export default function CitiesCards({ setType, setName }) {
   const cities = useSelector((state) => state.cities.cities);
   const dispatch = useDispatch();
   const [getWeather] = useLazyGetWeatherByCityQuery();
@@ -27,6 +27,7 @@ export default function CitiesCards({ setType }) {
 
   async function updateWeather(name) {
     const result = await getWeather(name);
+    const key = name.toLowerCase();
 
     if (result.data) {
       dispatch(
@@ -42,6 +43,7 @@ export default function CitiesCards({ setType }) {
           windSpeed: result.data.wind.speed,
           visibility: result.data.visibility,
           icon: result.data.weather[0].icon,
+          isFavorite: cities[key].isFavorite,
           coord: result.data.coord,
         })
       );
@@ -58,7 +60,7 @@ export default function CitiesCards({ setType }) {
       <section>
         <div className="container">
           <ul className={styles.list}>
-            {sortedCities.map((el, i) => {
+            {sortedCities.map((el) => {
               const date = new Date(el.date);
 
               return (
@@ -137,7 +139,11 @@ export default function CitiesCards({ setType }) {
                       </button>
                     </div>
                     <div className={styles.utilsRight}>
-                      <button type="button" className={styles.btnMore}>
+                      <button
+                        type="button"
+                        className={styles.btnMore}
+                        onClick={() => setName(el.name)}
+                      >
                         See more
                       </button>
                       <button

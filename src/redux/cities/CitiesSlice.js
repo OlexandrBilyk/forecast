@@ -24,7 +24,7 @@ export const citiesSlice = createSlice({
                 visibility,
                 coord,
                 icon,
-                isFavorite: isFavorite || false,
+                isFavorite: isFavorite,
                 date: new Date().toISOString(),
             };
 

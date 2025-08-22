@@ -160,7 +160,7 @@
 
 .btnMore {
     border-radius: 5px;
-    padding: 8px 20px;
+    padding: 8px 15px;
     background-color: #ffb36c;
 
     font-family: "Montserrat", sans-serif;
@@ -181,10 +181,13 @@
 
     &.iconFavorite {
         display: none;
+        fill: red;
     }
 
     &.iconDefault {
         display: block;
+        fill: red;
+
     }
 
     @media (min-width:1024px) {
