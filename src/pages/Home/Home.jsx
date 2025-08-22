@@ -3,6 +3,7 @@ import Hero from "../../components/Hero/Hero";
 import News from "../../components/News/News";
 import WeatherInfo from "../../components/WeatherInfo/WeatherInfo";
 import Nature from "../../components/Nature/Nature";
+import Footer from "../../components/Footer/Footer";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <WeatherInfo></WeatherInfo>
       <News></News>
       <Nature></Nature>
+      <Footer></Footer>
     </>
   );
 }

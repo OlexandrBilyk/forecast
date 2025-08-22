@@ -1,0 +1,113 @@
+.footer {
+    background-color: #ffb36c;
+    padding: 30px 0;
+
+    @media (min-width:768px) {
+        padding: 35px 0;
+    }
+
+    @media (min-width:1024px) {
+        padding: 50px 0;
+    }
+}
+
+.logo {
+    width: 60px;
+    height: 35px;
+
+    @media (min-width:768px) {
+        width: 90px;
+        height: 65px;
+
+    }
+}
+
+.footerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
+
+    @media (min-width:768px) {
+        flex-direction: row;
+        gap: 103px;
+        justify-content: flex-start;
+
+    }
+
+}
+
+.footerPages {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 75px;
+
+    @media (min-width:768px) {
+        gap: 103px;
+    }
+}
+
+.addressTitle {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #000;
+    margin-bottom: 15px;
+
+
+    @media (min-width:768px) {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    @media (min-width:1024px) {
+        font-size: 18px;
+    }
+}
+
+.addressText {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    color: #000;
+    max-width: 82px;
+
+    @media (min-width:1024px) {
+        font-size: 14px;
+        max-width: 100px;
+    }
+}
+
+.contactTitle {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #000;
+    margin-bottom: 17px;
+    text-align: center;
+
+    @media (min-width:768px) {
+        font-size: 16px;
+        margin-bottom: 10px;
+        text-align: left;
+    }
+
+
+    @media (min-width:1024px) {
+        font-size: 18px;
+    }
+}
+
+.list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+}

@@ -16,8 +16,6 @@ export default function News() {
       data.articles.forEach((el) => {
         setNews((prev) => [...prev, el]);
       });
-
-      console.log(data, news);
     } catch (err) {
       console.error("Ошибка запроса:", err);
     }

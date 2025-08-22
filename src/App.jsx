@@ -15,20 +15,20 @@ export default function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const savedUser = JSON.parse(localStorage.getItem("currentUser") || "[]");
+    const savedUser = JSON.parse(localStorage.getItem("currentUser") || "null");
     if (savedUser) {
       dispatch(login(savedUser));
       dispatch(setUser(savedUser));
 
       navigate("/home");
-    }
 
-    const cities = JSON.parse(
-      localStorage.getItem(`cities${savedUser?.username}`) || "{}"
-    );
+      const cities = JSON.parse(
+        localStorage.getItem(`cities${savedUser?.username}`) || "{}"
+      );
 
-    if (cities) {
-      dispatch(setCities(cities));
+      if (cities) {
+        dispatch(setCities(cities));
+      }
     }
   }, [dispatch]);
 
