@@ -8,7 +8,6 @@ export default function News() {
   const [page, setPage] = useState(1);
 
   const getNewsData = async () => {
-    setLoading(true);
     try {
       const data = await getNews({ page }).unwrap();
       setPage((prev) => prev + 1);
