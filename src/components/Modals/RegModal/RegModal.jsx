@@ -6,6 +6,7 @@ import { setUser } from "../../../redux/user/userSlice";
 import styles from "../Modal.module.scss";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../../redux/auth/authSlice";
+import { setCities } from "../../../redux/cities/CitiesSlice";
 
 export default function RegModal() {
   const dispatch = useDispatch();
@@ -56,6 +57,14 @@ export default function RegModal() {
 
           dispatch(setUser(values));
           dispatch(login(values));
+
+          const cities = JSON.parse(
+            localStorage.getItem(`cities${savedUser?.username}`) || "{}"
+          );
+
+          if (cities) {
+            dispatch(setCities(cities));
+          }
 
           toast.success("✅ Успешная регистрация!");
 

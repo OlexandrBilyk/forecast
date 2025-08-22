@@ -20,7 +20,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 214px;
+    gap: 160px;
 
     @media (min-width:768px) {
         gap: 57px;
@@ -32,13 +32,8 @@
 }
 
 .logo {
-    width: 34px;
-    height: 34px;
-
-    @media (min-width:768px) {
-        width: 54px;
-        height: 36px;
-    }
+    width: 54px;
+    height: 36px;
 
     @media (min-width:1024px) {
         width: 82px;
@@ -99,4 +94,35 @@
             font-size: 10px;
         }
     }
+}
+
+.img {
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+.openBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background-color: transparent;
+
+
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #000;
+
+    &.open {
+        .icon {
+            transform: rotate(0);
+        }
+    }
+}
+
+.icon {
+    transform: rotate(-90deg);
+    transition: transform, 250ms ease-in-out;
 }

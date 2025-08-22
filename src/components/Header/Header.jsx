@@ -1,11 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../redux/auth/authSlice";
 import styles from "./Header.module.scss";
-import { Link, useNavigate } from "react-router-dom";
-import Burger from "../Burger/Burger";
+import { Link } from "react-router-dom";
 import { setCities } from "../../redux/cities/CitiesSlice";
+import Avatar from "../Avatar/Avatar";
+import { FaChevronDown } from "react-icons/fa";
 
-export default function Header() {
+export default function Header({ setIsOpen }) {
   const { username } = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
@@ -16,6 +17,16 @@ export default function Header() {
           <Link to="/home">
             <img src="/icons/logo.svg" alt="logo" className={styles.logo} />
           </Link>
+          <button
+            type="button"
+            onClick={(e) => {
+              setIsOpen((prev) => !prev);
+              e.currentTarget.classList.toggle(styles.open);
+            }}
+            className={styles.openBtn}
+          >
+            Menu <FaChevronDown className={styles.icon}></FaChevronDown>
+          </button>
           <nav>
             <ul className={styles.list}>
               <li className={styles.item}>
@@ -48,7 +59,7 @@ export default function Header() {
             {username}
           </button>
           <div className={styles.profileImg}>
-            <img src="/images/public-profile-img.jpg" alt="profile img" />
+            <Avatar className={styles.img}></Avatar>
           </div>
         </div>
       </div>
