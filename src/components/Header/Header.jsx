@@ -35,7 +35,6 @@ export default function Header() {
             </ul>
           </nav>
         </div>
-        {/* <Burger></Burger> */}
         <div className={styles.profile}>
           <button
             type="button"
