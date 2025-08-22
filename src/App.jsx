@@ -21,14 +21,14 @@ export default function App() {
       dispatch(setUser(savedUser));
 
       navigate("/home");
+    }
 
-      const cities = JSON.parse(
-        localStorage.getItem(`cities${savedUser?.username}`) || "{}"
-      );
+    const cities = JSON.parse(
+      localStorage.getItem(`cities${savedUser?.username}`) || "{}"
+    );
 
-      if (cities) {
-        dispatch(setCities(cities));
-      }
+    if (cities) {
+      dispatch(setCities(cities));
     }
   }, [dispatch]);
 

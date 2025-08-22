@@ -59,7 +59,7 @@ export default function RegModal() {
           dispatch(login(values));
 
           const cities = JSON.parse(
-            localStorage.getItem(`cities${savedUser?.username}`) || "{}"
+            localStorage.getItem(`cities${values?.username}`) || "{}"
           );
 
           if (cities) {

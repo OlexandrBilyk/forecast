@@ -115,6 +115,10 @@
     font-size: 14px;
     color: #000;
 
+    @media (min-width:768px) {
+        display: none;
+    }
+
     &.open {
         .icon {
             transform: rotate(0);
