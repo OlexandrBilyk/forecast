@@ -28,14 +28,15 @@ export const citiesSlice = createSlice({
                 date: new Date().toISOString(),
             };
 
-            localStorage.setItem('cities', JSON.stringify(state.cities))
+            const user = JSON.parse(localStorage.getItem('currentUser') || "{}")
+            localStorage.setItem(`cities${user?.username}`, JSON.stringify(state.cities))
         },
         delCity: (state, action) => {
             const key = action.payload.toLowerCase()
 
             delete state.cities[key]
-            localStorage.setItem('cities', JSON.stringify(state.cities))
-
+            const user = JSON.parse(localStorage.getItem('currentUser') || "{}")
+            localStorage.setItem(`cities${user?.username}`, JSON.stringify(state.cities))
         },
         setCities: (state, action) => {
             state.cities = action.payload
@@ -48,7 +49,8 @@ export const citiesSlice = createSlice({
                 state.cities[key].isFavorite = !state.cities[key].isFavorite
             }
 
-            localStorage.setItem('cities', JSON.stringify(state.cities))
+            const user = JSON.parse(localStorage.getItem('currentUser') || "{}")
+            localStorage.setItem(`cities${user?.username}`, JSON.stringify(state.cities))
         }
     }
 })

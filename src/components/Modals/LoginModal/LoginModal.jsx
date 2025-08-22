@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import styles from "../Modal.module.scss";
 import { setUser } from "../../../redux/user/userSlice";
 import { login } from "../../../redux/auth/authSlice";
+import { setCities } from "../../../redux/cities/CitiesSlice";
 
 export default function LoginModal() {
   const dispatch = useDispatch();
@@ -46,7 +47,17 @@ export default function LoginModal() {
 
           dispatch(setUser(values));
           dispatch(login(foundUser));
+          const savedUser = JSON.parse(
+            localStorage.getItem("currentUser") || "[]"
+          );
 
+          const cities = JSON.parse(
+            localStorage.getItem(`cities${savedUser?.username}`) || "{}"
+          );
+
+          if (cities) {
+            dispatch(setCities(cities));
+          }
           toast.success("✅ Успешная регистрация!");
 
           setTimeout(() => {

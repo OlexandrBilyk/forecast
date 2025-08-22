@@ -4,6 +4,7 @@ import authReducer from "./auth/authSlice";
 import { weatherApi } from "./weather/weatherApi";
 import citiesReducer from "./cities/CitiesSlice";
 import { newsApi } from "./news/newsApi";
+import { pixabayApi } from "./pixabay/pixabayApi";
 
 export const store = configureStore({
     reducer: {
@@ -11,11 +12,13 @@ export const store = configureStore({
         auth: authReducer,
         cities: citiesReducer,
         [weatherApi.reducerPath]: weatherApi.reducer,
-        [newsApi.reducerPath]: newsApi.reducer
+        [newsApi.reducerPath]: newsApi.reducer,
+        [pixabayApi.reducerPath]: pixabayApi.reducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware()
             .concat(weatherApi.middleware)
             .concat(newsApi.middleware)
+            .concat(pixabayApi.middleware)
 })
 

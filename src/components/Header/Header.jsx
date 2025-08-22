@@ -3,6 +3,7 @@ import { logout } from "../../redux/auth/authSlice";
 import styles from "./Header.module.scss";
 import { Link } from "react-router-dom";
 import Burger from "../Burger/Burger";
+import { setCities } from "../../redux/cities/CitiesSlice";
 
 export default function Header() {
   const { username } = useSelector((state) => state.user.user);
@@ -38,7 +39,10 @@ export default function Header() {
         <div className={styles.profile}>
           <button
             type="button"
-            onClick={() => dispatch(logout())}
+            onClick={() => {
+              dispatch(logout());
+              dispatch(setCities({}));
+            }}
             className={styles.profileBtn}
           >
             {username}
