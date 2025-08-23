@@ -27,25 +27,23 @@ export default function Header({ setIsOpen }) {
           >
             Menu <FaChevronDown className={styles.icon}></FaChevronDown>
           </button>
-          <nav>
-            <ul className={styles.list}>
-              <li className={styles.item}>
-                <a href="#" className={styles.link}>
-                  Who we are
-                </a>
-              </li>
-              <li className={styles.item}>
-                <a href="#" className={styles.link}>
-                  Contacts
-                </a>
-              </li>
-              <li className={styles.item}>
-                <a href="#" className={styles.link}>
-                  Menu
-                </a>
-              </li>
-            </ul>
-          </nav>
+          <ul className={styles.list}>
+            <li className={styles.item}>
+              <a href="#" className={styles.link}>
+                Who we are
+              </a>
+            </li>
+            <li className={styles.item}>
+              <a href="#" className={styles.link}>
+                Contacts
+              </a>
+            </li>
+            <li className={styles.item}>
+              <a href="#" className={styles.link}>
+                Menu
+              </a>
+            </li>
+          </ul>
         </div>
         <div className={styles.profile}>
           <button
