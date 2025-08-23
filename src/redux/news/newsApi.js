@@ -13,7 +13,7 @@ export const newsApi = createApi({
     endpoints: (builder) => ({
         getNews: builder.query({
             query: ({ page = 1, limit = 4 }) =>
-                `everything?q=Apple&from=${today}&sortBy=popularity&page=${page}&pageSize=${limit}&apiKey=${apiKey}`,
+                `everything?q=Apple&from=${today}&page=${page}&pageSize=${limit}&apiKey=${apiKey}`,
             providesTags: ["news"],
         }),
     }),
