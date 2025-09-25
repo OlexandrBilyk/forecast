@@ -76,8 +76,6 @@ export default function RegModal() {
             className={styles.input}
             {...register("username", {
               required: "Please enter username",
-              validate: (value) =>
-                value.trim() !== "" || "Please enter username",
             })}
           />
         </label>
